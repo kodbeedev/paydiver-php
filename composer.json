@@ -1,0 +1,44 @@
+{
+    "name": "kodbee/jomabee-php",
+    "description": "Official PHP client for the Jomabee payment API by Kodbee — create payments, verify transactions, check status/balance and validate webhooks.",
+    "type": "library",
+    "keywords": ["jomabee", "kodbee", "payment", "bangladesh", "bkash", "nagad", "rocket", "upay", "sdk"],
+    "homepage": "https://kodbee.com",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Kodbee",
+            "email": "support@kodbee.com",
+            "homepage": "https://kodbee.com"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/kodbeedev/jomabee-php/issues",
+        "source": "https://github.com/kodbeedev/jomabee-php"
+    },
+    "require": {
+        "php": ">=8.1",
+        "ext-curl": "*",
+        "ext-json": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Kodbee\\Jomabee\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Kodbee\\Jomabee\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "stable"
+}
