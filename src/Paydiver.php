@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Kodbee\Jomabee;
+namespace Kodbee\Paydiver;
 
-use Kodbee\Jomabee\Exceptions\ApiException;
-use Kodbee\Jomabee\Exceptions\ConfigurationException;
-use Kodbee\Jomabee\Exceptions\NetworkException;
+use Kodbee\Paydiver\Exceptions\ApiException;
+use Kodbee\Paydiver\Exceptions\ConfigurationException;
+use Kodbee\Paydiver\Exceptions\NetworkException;
 
 /**
- * Official PHP client for the Jomabee payment API by Kodbee.
+ * Official PHP client for the Paydiver payment API by Kodbee.
  *
  * @see https://kodbee.com
  */
-final class Jomabee
+final class Paydiver
 {
     public const VERSION = '1.0.0';
 
@@ -116,7 +116,7 @@ final class Jomabee
     {
         if ($this->secretKey === null) {
             throw new ConfigurationException(
-                "Jomabee::{$method}() requires a secret key. Pass it as the second constructor argument."
+                "Paydiver::{$method}() requires a secret key. Pass it as the second constructor argument."
             );
         }
     }
@@ -130,7 +130,7 @@ final class Jomabee
         $headers = [
             'Accept: application/json',
             'X-API-Key: ' . $this->apiKey,
-            'User-Agent: jomabee-php/' . self::VERSION,
+            'User-Agent: paydiver-php/' . self::VERSION,
         ];
 
         if ($withSecret && $this->secretKey !== null) {

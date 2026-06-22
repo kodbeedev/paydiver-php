@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Kodbee\Jomabee\Exceptions;
+namespace Kodbee\Paydiver\Exceptions;
 
 /** Thrown when the API returns an error response (4xx/5xx or success=false). */
-final class ApiException extends JomabeeException
+final class ApiException extends PaydiverException
 {
     public function __construct(
         string $message,

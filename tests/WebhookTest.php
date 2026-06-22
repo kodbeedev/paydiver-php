@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Kodbee\Jomabee\Tests;
+namespace Kodbee\Paydiver\Tests;
 
-use Kodbee\Jomabee\Webhook;
+use Kodbee\Paydiver\Webhook;
 use PHPUnit\Framework\TestCase;
 
 final class WebhookTest extends TestCase
@@ -23,14 +23,14 @@ final class WebhookTest extends TestCase
 
     public function test_valid_signature_passes(): void
     {
-        $payload = ['event' => 'payment.verified', 'invoice_id' => 'JOMB-ABC', 'amount' => 500.0];
+        $payload = ['event' => 'payment.verified', 'invoice_id' => 'PAYD-ABC', 'amount' => 500.0];
 
         $this->assertTrue(Webhook::isValid($payload, $this->sign($payload), self::SECRET));
     }
 
     public function test_tampered_payload_fails(): void
     {
-        $payload = ['event' => 'payment.verified', 'invoice_id' => 'JOMB-ABC', 'amount' => 500.0];
+        $payload = ['event' => 'payment.verified', 'invoice_id' => 'PAYD-ABC', 'amount' => 500.0];
         $signature = $this->sign($payload);
 
         $payload['amount'] = 999.0;
@@ -48,12 +48,12 @@ final class WebhookTest extends TestCase
 
     public function test_verify_returns_payload(): void
     {
-        $payload = ['event' => 'payment.verified', 'invoice_id' => 'JOMB-XYZ'];
+        $payload = ['event' => 'payment.verified', 'invoice_id' => 'PAYD-XYZ'];
         $body = (string) json_encode($payload, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
 
         $verified = Webhook::verify($body, $this->sign($payload), self::SECRET);
 
-        $this->assertSame('JOMB-XYZ', $verified['invoice_id']);
+        $this->assertSame('PAYD-XYZ', $verified['invoice_id']);
     }
 
     public function test_verify_throws_on_bad_signature(): void

@@ -1,6 +1,6 @@
-# Jomabee PHP
+# Paydiver PHP
 
-Official PHP client for the [Jomabee](https://kodbee.com) payment API by **Kodbee**.
+Official PHP client for the [Paydiver](https://kodbee.com) payment API by **Kodbee**.
 Zero dependencies (just cURL + JSON) — works in any PHP 8.1+ project.
 
 - Create payments and get a hosted payment URL + QR
@@ -11,28 +11,28 @@ Zero dependencies (just cURL + JSON) — works in any PHP 8.1+ project.
 ## Install
 
 ```bash
-composer require kodbee/jomabee-php
+composer require kodbee/paydiver-php
 ```
 
 ## Quick start
 
 ```php
-use Kodbee\Jomabee\Jomabee;
+use Kodbee\Paydiver\Paydiver;
 
-$jomabee = new Jomabee(
+$paydiver = new Paydiver(
     apiKey: 'your_api_key',
     secretKey: 'your_secret_key',      // required for create/verify
-    baseUrl: 'https://pay.kodbee.com'  // your Jomabee instance
+    baseUrl: 'https://pay.kodbee.com'  // your Paydiver instance
 );
 
 // Create a payment
-$payment = $jomabee->createPayment([
+$payment = $paydiver->createPayment([
     'amount' => 500,
     'product_name' => 'Premium Plan',
     'customer_name' => 'Karim Mia',
     'customer_email' => 'karim@example.com',
     'redirect_url' => 'https://yoursite.com/thank-you',
-    'callback_url' => 'https://yoursite.com/webhooks/jomabee',
+    'callback_url' => 'https://yoursite.com/webhooks/paydiver',
     // 'gateway' => 'bkash',          // optional: lock to one gateway
     // 'expiry_minutes' => 30,
 ]);
@@ -44,26 +44,26 @@ header('Location: ' . $payment['payment_url']); // send customer to pay
 
 ```php
 // Verify a payment with a customer-supplied TrxID
-$result = $jomabee->verifyPayment('JOMB-XXXXXX', 'ABCDE12345', 'bkash');
+$result = $paydiver->verifyPayment('PAYD-XXXXXX', 'ABCDE12345', 'bkash');
 // $result['status'] => verified | pending | failed | expired | duplicate
 
 // Poll invoice status
-$status = $jomabee->paymentStatus('JOMB-XXXXXX');
+$status = $paydiver->paymentStatus('PAYD-XXXXXX');
 
 // List transactions
-$txns = $jomabee->transactions(['status' => 'verified', 'per_page' => 50]);
+$txns = $paydiver->transactions(['status' => 'verified', 'per_page' => 50]);
 
 // Balance
-$balance = $jomabee->balance(); // ['currency' => 'BDT', 'verified_total' => ..., 'available' => ...]
+$balance = $paydiver->balance(); // ['currency' => 'BDT', 'verified_total' => ..., 'available' => ...]
 ```
 
 ## Webhooks
 
-Jomabee signs the JSON payload with HMAC-SHA256 and sends the digest in the
-`X-Jomabee-Signature` header.
+Paydiver signs the JSON payload with HMAC-SHA256 and sends the digest in the
+`X-Paydiver-Signature` header.
 
 ```php
-use Kodbee\Jomabee\Webhook;
+use Kodbee\Paydiver\Webhook;
 
 try {
     $event = Webhook::verifyRequest('your_webhook_secret');
@@ -85,12 +85,12 @@ Webhook::isValid($payloadArray, $signature, $secret); // returns bool
 ## Error handling
 
 ```php
-use Kodbee\Jomabee\Exceptions\ApiException;
-use Kodbee\Jomabee\Exceptions\NetworkException;
-use Kodbee\Jomabee\Exceptions\ConfigurationException;
+use Kodbee\Paydiver\Exceptions\ApiException;
+use Kodbee\Paydiver\Exceptions\NetworkException;
+use Kodbee\Paydiver\Exceptions\ConfigurationException;
 
 try {
-    $jomabee->createPayment([...]);
+    $paydiver->createPayment([...]);
 } catch (ApiException $e) {
     echo $e->errorCode();   // e.g. invalid_api_key, not_found
     echo $e->statusCode();  // HTTP status
@@ -102,7 +102,7 @@ try {
 }
 ```
 
-All exceptions extend `Kodbee\Jomabee\Exceptions\JomabeeException`.
+All exceptions extend `Kodbee\Paydiver\Exceptions\PaydiverException`.
 
 ## License
 

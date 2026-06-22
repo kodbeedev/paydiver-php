@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Kodbee\Jomabee;
+namespace Kodbee\Paydiver;
 
 /**
- * Verify and parse incoming Jomabee webhook requests.
+ * Verify and parse incoming Paydiver webhook requests.
  *
- * Jomabee signs the JSON payload with HMAC-SHA256 and sends the hex digest in
- * the `X-Jomabee-Signature` header. The signature is computed over the JSON
+ * Paydiver signs the JSON payload with HMAC-SHA256 and sends the hex digest in
+ * the `X-Paydiver-Signature` header. The signature is computed over the JSON
  * encoded with unescaped slashes and unicode, so verification re-encodes the
  * decoded payload the same way before comparing.
  */
 final class Webhook
 {
-    public const SIGNATURE_HEADER = 'X-Jomabee-Signature';
+    public const SIGNATURE_HEADER = 'X-Paydiver-Signature';
 
     private const JSON_FLAGS = JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE;
 
@@ -66,7 +66,7 @@ final class Webhook
     public static function verifyRequest(string $secret): array
     {
         $body = (string) file_get_contents('php://input');
-        $signature = $_SERVER['HTTP_X_JOMABEE_SIGNATURE'] ?? '';
+        $signature = $_SERVER['HTTP_X_PAYDIVER_SIGNATURE'] ?? '';
 
         return self::verify($body, (string) $signature, $secret);
     }

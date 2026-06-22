@@ -2,11 +2,11 @@
 
 require __DIR__ . '/../vendor/autoload.php';
 
-use Kodbee\Jomabee\Webhook;
+use Kodbee\Paydiver\Webhook;
 
-// Endpoint that Jomabee calls on payment.verified
+// Endpoint that Paydiver calls on payment.verified
 try {
-    $event = Webhook::verifyRequest(getenv('JOMABEE_WEBHOOK_SECRET') ?: 'your_webhook_secret');
+    $event = Webhook::verifyRequest(getenv('PAYDIVER_WEBHOOK_SECRET') ?: 'your_webhook_secret');
 } catch (\RuntimeException $e) {
     http_response_code(400);
     exit('Invalid signature');

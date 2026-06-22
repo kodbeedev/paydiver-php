@@ -1,8 +1,8 @@
 {
-    "name": "kodbee/jomabee-php",
-    "description": "Official PHP client for the Jomabee payment API by Kodbee — create payments, verify transactions, check status/balance and validate webhooks.",
+    "name": "kodbee/paydiver-php",
+    "description": "Official PHP client for the Paydiver payment API by Kodbee — create payments, verify transactions, check status/balance and validate webhooks.",
     "type": "library",
-    "keywords": ["jomabee", "kodbee", "payment", "bangladesh", "bkash", "nagad", "rocket", "upay", "sdk"],
+    "keywords": ["paydiver", "kodbee", "payment", "bangladesh", "bkash", "nagad", "rocket", "upay", "sdk"],
     "homepage": "https://kodbee.com",
     "license": "MIT",
     "authors": [
@@ -13,8 +13,8 @@
         }
     ],
     "support": {
-        "issues": "https://github.com/kodbeedev/jomabee-php/issues",
-        "source": "https://github.com/kodbeedev/jomabee-php"
+        "issues": "https://github.com/kodbeedev/paydiver-php/issues",
+        "source": "https://github.com/kodbeedev/paydiver-php"
     },
     "require": {
         "php": ">=8.1",
@@ -26,12 +26,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Kodbee\\Jomabee\\": "src/"
+            "Kodbee\\Paydiver\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Kodbee\\Jomabee\\Tests\\": "tests/"
+            "Kodbee\\Paydiver\\Tests\\": "tests/"
         }
     },
     "scripts": {
